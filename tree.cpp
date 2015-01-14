@@ -46,6 +46,20 @@ void print_tree(Node* node) {
   }
 }
 
+void clean_up(Node* node) {
+  if (node->right != NULL) {
+    clean_up(node->right);
+  }
+  if (node->left != NULL) {
+    clean_up(node->left);
+  }
+  if (node->left == NULL && node->right ==NULL) {
+    delete node;
+    return;
+  }
+}
+    
+
 int main(int argc, char* argv[]) {
   bool done = false;
   int to_insert;
@@ -60,8 +74,12 @@ int main(int argc, char* argv[]) {
   while (!done) {
     cout << "Input data:";
     cin >> to_insert; 
+    if (to_insert == -100) {
+      done = true;
+    }
     insert(root, to_insert);
     print_tree(root);
   }
+  clean_up(root);
   return 0;
 }
