@@ -30,6 +30,23 @@ void print_list(Node* node) {
   cout << temp->data << endl;
 }
 
+void remove(Node* node, int data) {
+  Node* temp = node;
+  while ((temp->data != data) && (temp->next != NULL)) {
+    temp = temp->next;
+  }
+  if ((temp->next == NULL) && (temp->data != data)) {
+    cout << data << " not found." << endl;
+  } else if (temp->prev == NULL) {
+    node = temp->next;
+    node->prev = NULL;
+    delete temp;
+  } else {
+    temp->prev->next = temp->next;
+    delete temp;
+  }
+}
+
 void clean_up(Node* node) {
   while (node->next != NULL) {
     node = node->next;
@@ -41,8 +58,7 @@ void clean_up(Node* node) {
 }
 
 int main(int argc, char* argv[]) {
-  Node node;
-  Node* root = &node;
+  Node* root = new Node;
   bool done = false;
   int data;
   cout << "Insert:";
@@ -54,6 +70,13 @@ int main(int argc, char* argv[]) {
     cout << "Insert:";
     cin >> data;
     insert(root, data);
+    cout << endl;
+    print_list(root);
+  }
+  while (data != -2) {
+    cout << "Remove:";
+    cin >> data;
+    remove(root, data);
     cout << endl;
     print_list(root);
   }
