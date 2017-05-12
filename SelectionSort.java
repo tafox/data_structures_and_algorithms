@@ -2,16 +2,9 @@ import java.util.*;
 
 public class SelectionSort {
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);    
-        System.out.print("Insert number of elements: ");
-        int n = in.nextInt();
-        int numbers[] = new int[n];
-        for (int i = 0; i < n; i++) {
-            System.out.print("Insert element " + Integer.toString(i+1) + ": ");
-            numbers[i] = in.nextInt();
-        }
+        int[] numbers = ReadIntegers.readIntegers();
         System.out.println("Sorting: " + Arrays.toString(numbers));
-        sort(numbers, n);
+        sort(numbers, numbers.length);
         System.out.println("Sorted: " + Arrays.toString(numbers));
     }
     
